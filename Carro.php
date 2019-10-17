@@ -6,8 +6,10 @@ class Carro {
     public $placa;
     public $cor;
     public $modelo;
+    public $motorista;
+    public $ocupaVaga;
 
-    public function __construct($placa, $cor, $modelo) {
+    public function __construct($placa, $cor, $modelo, $motorista) {
         $this->placa = $placa;
         $this->cor = $cor;
         $this->modelo = $modelo;

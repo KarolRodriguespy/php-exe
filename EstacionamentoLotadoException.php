@@ -3,5 +3,7 @@ namespace Challenges;
 
 class EstacionamentoLotadoException extends \Exception
 {
-   print_r('Estacionamento Lotado');
+   public function EstacionamentoCheio(Estacionamento $estacionamento) {
+       return "Não tem vagas";
+   }
 }

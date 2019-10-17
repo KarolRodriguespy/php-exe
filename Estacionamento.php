@@ -1,55 +1,55 @@
 <?php
+
 namespace Challenges;
 
 use \InvalidArgumentException;
-use \Motorista;
 
 class Estacionamento
 {
-    #dizendo a capacidade
-    private $capacidade = 10;
-    #array vagas
-    public $vagasDispo = [];
 
-    #verificando se pode estacionar ou não
-    public function estacionar(Motorista $motorista)
+    public $vaga = [];
+    private $capacidade = 10; 
+
+    public function estacionar(Carro $carro)
     {
-        $vagas = array_map(function ($item) {
-            return $vaga->vagas;
-        }, $this->motoristas);
+        $ocupaVaga = array_map(function ($item) {
+            return $item->ocupaVaga;
+        }, $this->vaga);
 
-        $preenchida = array_sum($vagas);
+        $preenchida = array_sum($ocupaVaga);
 
-        if ($motorista->vagas > ($this->capacidade - $preenchida)) {
-            throw new \InvalidArgumentException("Capacidade excedida!!!");
+        if ($carro->ocupaVaga > ($this->capacidade - $preenchida)) {
+            throw new InvalidArgumentException("Estacionamento Lotado");
         }
-        $this->motoristas[] = $motoristas;
-        return $motoristas;
+        $this->vaga[] = $carro;
+
+        return $carro;
     }
 
-    public function estacionarCarros(array $carros)
+    public function estaEstacionado(Carros $carros)
     {
-        $todosOsCarros = [];
+        $todoasvagas = [];
+
         try {
             foreach ($carros as $carro) {
-                $this->receber($carro);
-                $todosOsCarros[] = $carro;
+                $this->estacionando($carro);
+                $todoasvagas[] = $carro;
             }
         } catch (\InvalidArgumentException $e) {
             foreach ($carros as $carro) {
                 $this->retirar($carro->carro);
             }
         }
-        return $todosOsCarros;
+        return array($todoasvagas);
     }
 
-/*public function retirarCarro(array $carros)
-{
-$todosOsCarros = [];
-foreach ($carros as $carro) {
-$todosOsCarros[] = $this->retirarCarro($carro);
-}
-return $todosOsCarros;
-}*/
+    public function retirar(array $carros)
+    {
+        $todoasvagas = [];
+        foreach ($carros as $carro) {
+            $todoasvagas[] = $this->retirar($carro);
+        }
+        return $todoasvagas;
+    }
 
 }
