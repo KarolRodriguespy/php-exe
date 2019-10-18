@@ -2,8 +2,9 @@
 namespace Challenges;
 
 class EstacionamentoLotadoException extends \Exception
-{
-   public function EstacionamentoCheio(Estacionamento $estacionamento) {
-       return "Não tem vagas";
-   }
+
+    {
+        public function Lotado(Estacionamento $estacionamento){
+            return "Não tem vaga";
+        }
 }
